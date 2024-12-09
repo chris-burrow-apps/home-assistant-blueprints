@@ -1,0 +1,163 @@
+blueprint:
+  name: Cast to Google Home Hub by Dashcast
+  description: Casting lovelace view to a Google Home Hub. Then every 10mins, check if the dashboard is being shown.
+  domain: automation
+  input:
+    media_player:
+      name: Google Home Hub
+      description: Google Home Hub device to cast to
+      selector:
+        entity:
+          domain: media_player
+    dashboard_url:
+      name: Lovelace Dashboard URL
+      description: URL to the lovelace dashboard.
+      default: https://example-url.com/default_view
+    start_time:
+      name: Start trigger
+      description: When do you want the dashboard to start casting
+      selector:
+        time:
+    stop_time:
+      name: End trigger
+      description: When do you want the dashboard to stop casting
+      selector:
+        time:
+        
+mode: restart
+max_exceeded: silent
+
+variables:
+  selected_player: !input media_player  # Variable to hold the selected media player entity
+  start_time: !input start_time
+  stop_time: !input stop_time
+
+trigger:
+  - platform: state
+    entity_id: !input 'media_player'
+    to: 'off'
+    for: 00:05:00
+  - platform: state
+    entity_id: !input 'media_player'
+    to: 'idle'
+    for: 00:05:00
+  - trigger: time
+    at: !input 'stop_time'
+    id: stop_casting
+  - platform: time_pattern
+    minutes: "/10"
+  
+action:
+  - if:
+      - condition: and
+        conditions:
+          - condition: time
+            after: !input 'start_time'
+            before: !input 'stop_time'
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: !input 'media_player'
+                state: 'off'
+              - condition: state
+                entity_id: !input 'media_player'
+                state: 'idle'
+    then:
+      - action: media_player.volume_mute
+        metadata: {}
+        data:
+          is_volume_muted: true
+        target:
+          entity_id: !input 'media_player'
+      - action: media_player.turn_off
+        target:
+          entity_id: !input 'media_player'
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+      - action: dash_cast.load_url
+        metadata: {}
+        data:
+          force: true
+          entity_id: !input 'media_player'
+          url: !input 'dashboard_url'
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+      - action: media_player.volume_mute
+        metadata: {}
+        data:
+          is_volume_muted: false
+        target:
+          entity_id: !input 'media_player'
+  - if:
+      - condition: and
+        conditions:
+          - condition: time
+            after: !input 'start_time'
+            before: !input 'stop_time'
+          - condition: template
+            value_template: >
+              {{ 'DashCast' in state_attr(selected_player, 'app_name') }}
+    then:
+      - action: media_player.volume_mute
+        metadata: {}
+        data:
+          is_volume_muted: true
+        target:
+          entity_id: !input 'media_player'
+      - action: media_player.turn_off
+        target:
+          entity_id: !input 'media_player'
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+      - action: dash_cast.load_url
+        metadata: {}
+        data:
+          force: true
+          entity_id: !input 'media_player'
+          url: !input 'dashboard_url'
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+      - action: media_player.volume_mute
+        metadata: {}
+        data:
+          is_volume_muted: false
+        target:
+          entity_id: !input 'media_player'
+  - if:
+      - condition: or
+        conditions:
+          - condition: trigger
+            id:
+              - stop_casting
+          - condition: and
+            conditions:
+              - condition: time
+                after: !input 'stop_time'
+              - condition: template
+                value_template: >
+                  {{ 'Home Assistant Lovelace' in state_attr(selected_player, 'app_name') }}
+          - condition: and
+            conditions:
+              - condition: time
+                before: !input 'start_time'
+              - condition: template
+                value_template: >
+                  {{ 'Home Assistant Lovelace' in state_attr(selected_player, 'app_name') }}
+    then:
+      - action: media_player.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: !input 'media_player'
