@@ -1,0 +1,98 @@
+blueprint:
+  name: Motion-activated Light
+  description: Turn on a light when motion is detected at night.
+  domain: automation
+  input:
+    motion_entity:
+      name: Motion Sensor
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: motion
+    light_target:
+      name: Light
+      selector:
+        entity:
+          domain: light
+    no_motion_wait:
+      name: Wait time
+      description: Time to leave the light on after last motion is detected.
+      default: 120
+      selector:
+        number:
+          min: 0
+          max: 3600
+          unit_of_measurement: seconds
+    light_level_entity:
+      name: Light sensor
+      selector: 
+        entity:
+          domain: sensor
+          device_class: illuminance
+    lux_level:
+      name: Lux min level
+      description: Light level before light turns on even if its day
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: lux
+          mode: box
+
+mode: restart
+max_exceeded: silent
+
+triggers:
+  - entity_id: !input motion_entity
+    to: "on"
+    trigger: state
+    from: "off"
+    id: motion_detected
+  - entity_id: !input motion_entity
+    from: "on"
+    to: "off"
+    trigger: state
+    for:
+      hours: 0
+      minutes: 0
+      seconds: !input no_motion_wait
+    id: motion_cleared
+    
+conditions: []
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id:
+              - motion_detected
+        sequence:
+          - if:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: sun.sun
+                    state: below_horizon
+                  - condition: numeric_state
+                    entity_id: !input light_level_entity
+                    below: 0
+            then:
+              - alias: Turn on the light
+                entity_id: !input light_target
+                action: light.turn_on
+                data: {}
+      - conditions:
+          - condition: trigger
+            id:
+              - motion_cleared
+        sequence:
+          - if:
+              - condition: state
+                entity_id: !input light_target
+                state: "on"
+            then:
+              - alias: Turn off the light
+                entity_id: !input light_target
+                action: light.turn_off
+                data: {}
