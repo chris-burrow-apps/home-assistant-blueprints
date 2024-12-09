@@ -27,7 +27,7 @@ You need to have the following setup:
 
 ### Trusted IPs Example
 
-Within the configuration.yml of Home Assistant, you will need to include Trusted Provider setup so when you cast dashboards, you will not need to login on every device. Here is an example setup:
+Within the configuration.yml of Home Assistant, you will need to include Trusted Provider setup so when you cast dashboards, you will not need to log in on every device. Here is an example setup:
 
 ```
 homeassistant:
@@ -48,7 +48,7 @@ There is 2 different ways I worked out how to set this up locally:
 
 ### DashCast
 Highly configurable but that can be its downfall. It is a 3rd party add on for Home Assistant that can be linked with [BrowserMod](https://github.com/thomasloven/hass-browser_mod) or [Kiosk-mode](https://github.com/NemesisRE/kiosk-mode) which and create some crazy kiosk setups. 
-Unfortunately I have found it to be quite buggy with BrowserMod when it comes to hiding the side and top navigation but I thought I would include this script anyway in case you use it.
+Unfortunately I have found it to be quite buggy with BrowserMod when it comes to hiding the side and top navigation, but I thought I would include this script anyway in case you use it.
 
 ### Native Cast functionality
 Basic and simple. This will always be supported by Home Assistant but due to the way it is written, it is quite basic in its features but that can also be an advantage that no updates should hopefully be needed.
@@ -73,7 +73,7 @@ Within the config below, please update with your own setup:
 
 
 * Aspect ratio: aspect_ratio: '128:75'
-  * This is a required config when setting up the webview. Otherwise, the view would add scroll bars and would make the frame display outside the normal view. 
+  * This is a required config when setting up the web view. Otherwise, the view would add scroll bars and would make the frame display outside the normal view. 
   * Google Home Hub Ratio: "128:75"
   * Google Nest Hub Max Ratio: "8:5"
 
@@ -81,6 +81,9 @@ The next section can be entirely removed, but I thought I would include it in ca
 
 * Home Assistant Logo Image: /path/to/image.jpg
   * I have included a logo from Home Assistant like I have used in the example.
+
+
+<img src="/immich/immich-setup-files/home-assistant-logo.png" alt="Home Assistant Logo" width="200"/>
 
 
 * Home Assistant Dashboard Link: /lovelace/default_view
@@ -147,7 +150,7 @@ It should then look something like this
 
 ## Native Cast
 
-To setup native cast within Home Assistant, you can include this blueprint.
+To set up native cast within Home Assistant, you can include this blueprint.
 
 https://github.com/chris-burrow-apps/home-assistant-blueprints/blob/main/google_home_hub/cast_to_google_home_hub.yaml
 
@@ -170,7 +173,7 @@ https://github.com/chris-burrow-apps/home-assistant-blueprints/blob/main/google_
   * This is needed as if you navigate away from the picture frame using the home assistant button included, the hub would get stuck on the new dashboard and never show the picture frame again
 
 
-* By default when casting a lovelace view, the google Home Hub displays the view at high brightness which isn't nice if it's placed in a bedroom. So I added the functionality to disable the cast and allow the hub to dim and then start again in the morning.
+* By default, when casting a lovelace view, the Google Home Hub displays the view at high brightness which isn't nice if it's placed in a bedroom. So I added the functionality to disable the cast and allow the hub to dim and then start again in the morning.
   * Start trigger
   * End trigger
 
@@ -178,7 +181,7 @@ https://github.com/chris-burrow-apps/home-assistant-blueprints/blob/main/google_
 
 ## DashCast
 
-To setup dash cast within Home Assistant, you have to first set it up from HAC or manually:
+To set up dash cast within Home Assistant, you have to first set it up from HAC or manually:
 https://github.com/AlexxIT/DashCast
 
 https://github.com/chris-burrow-apps/home-assistant-blueprints/blob/main/google_home_hub/dashcast_to_google_home_hub.yaml
@@ -195,7 +198,7 @@ https://github.com/chris-burrow-apps/home-assistant-blueprints/blob/main/google_
 * Lovelace Dashboard URL: URL to the lovelace dashboard you would like to cast
 
 
-* By default when casting a lovelace view, the google Home Hub displays the view at high brightness which isn't nice if it's placed in a bedroom. So I added the functionality to disable the cast and allow the hub to dim and then start again in the morning.
+* By default, when casting a lovelace view, the Google Home Hub displays the view at high brightness which isn't nice if it's placed in a bedroom. So I added the functionality to disable the cast and allow the hub to dim and then start again in the morning.
   * Start trigger
   * End trigger
 
@@ -205,4 +208,4 @@ Next install one of these plugins to add extra functionality:
 * [Browser Mod 2](https://github.com/thomasloven/hass-browser_mod)
 * [Kiosk-mode](https://github.com/NemesisRE/kiosk-mode)
 
-By default, using dashcast, it will show everything not just the view you want to show. This includes the sidebar & top bar which allows the user to navigate anywhere. Instead you could use one of these plugins and hide everything or add custom functionality. 
+By default, using dashcast, it will show everything not just the view you want to show. This includes the sidebar & top bar which allows the user to navigate anywhere. Instead, you could use one of these plugins and hide everything or add custom functionality. 
