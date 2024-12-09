@@ -83,7 +83,7 @@ The next section can be entirely removed, but I thought I would include it in ca
   * I have included a logo from Home Assistant like I have used in the example.
 
 
-<img src="/immich/immich-setup-files/home-assistant-logo.png" alt="Home Assistant Logo" width="200"/>
+<img src="/immich/immich-setup-files/home-assistant-logo-alpha.png" alt="Home Assistant Logo" width="200"/>
 
 
 * Home Assistant Dashboard Link: /lovelace/default_view
