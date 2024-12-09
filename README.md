@@ -1,6 +1,11 @@
 # Home Assistant Blueprints
 
-I have been using Home Assistant for 10+ years, it's about time I started to contribute to help other users. 
+I have been using Home Assistant for 10+ years, it's about time I started to contribute to help other users.
+
+If these saved you some time. Maybe think about [buying me a coffee](https://www.buymeacoffee.com/chrisburrow)
+
+<img src="/images/bmc_qr.png" href="https://www.buymeacoffee.com/chrisburrow" alt="Buy Me a Coffee Link" width="200"/>
+
 I have these blueprints that may help some other people:
 
 * [Cast to Google Hub](#cast-to-google-hub)
