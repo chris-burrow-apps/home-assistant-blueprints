@@ -1,5 +1,9 @@
 # Immich Kiosk Mode
 
+If this saved you some time. Maybe think about [buying me a coffee](https://www.buymeacoffee.com/chrisburrow)
+
+<img src="/images/bmc_qr.png" href="https://www.buymeacoffee.com/chrisburrow" alt="Buy Me a Coffee Link" width="200"/>
+
 ## Introduction
 
 While converting my Google Hubs to no longer use Google Photos. I discovered an app called [Immich](https://immich.app/).
