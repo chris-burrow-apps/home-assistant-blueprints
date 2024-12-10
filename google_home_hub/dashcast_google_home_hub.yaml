@@ -1,6 +1,6 @@
 blueprint:
   name: Cast to Google Home Hub by Dashcast
-  description: Casting lovelace view to a Google Home Hub. Then every 10mins, check if the dashboard is being shown.
+  description: Casting lovelace view to a Google Home Hub. Dashcast is set to refresh every 10 mins.
   domain: automation
   input:
     media_player:
@@ -117,47 +117,7 @@ action:
           force: true
           entity_id: !input 'media_player'
           url: !input 'dashboard_url'
-      - delay:
-          hours: 0
-          minutes: 0
-          seconds: 5
-          milliseconds: 0
-      - action: media_player.volume_mute
-        metadata: {}
-        data:
-          is_volume_muted: false
-        target:
-          entity_id: !input 'media_player'
-    - conditions:
-      - condition: and
-        conditions:
-          - condition: time
-            after: !input 'start_time'
-            before: !input 'stop_time'
-          - condition: template
-            value_template: >
-              {{ 'DashCast' in state_attr(selected_player, 'app_name') }}
-      sequence:
-      - action: media_player.volume_mute
-        metadata: {}
-        data:
-          is_volume_muted: true
-        target:
-          entity_id: !input 'media_player'
-      - action: media_player.turn_off
-        target:
-          entity_id: !input 'media_player'
-      - delay:
-          hours: 0
-          minutes: 0
-          seconds: 2
-          milliseconds: 0
-      - action: dash_cast.load_url
-        metadata: {}
-        data:
-          force: true
-          entity_id: !input 'media_player'
-          url: !input 'dashboard_url'
+          reload_seconds: 600
       - delay:
           hours: 0
           minutes: 0
