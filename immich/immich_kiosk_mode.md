@@ -50,12 +50,13 @@ homeassistant:
 
 There is 2 different ways I worked out how to set this up locally:
 
+### Native Cast
+Basic and simple. This will always be supported by Home Assistant but due to the way it is written, it is quite basic in its features but that can also be an advantage that no updates should hopefully be needed.
+
+
 ### DashCast
 Highly configurable but that can be its downfall. It is a 3rd party add on for Home Assistant that can be linked with [BrowserMod](https://github.com/thomasloven/hass-browser_mod) or [Kiosk-mode](https://github.com/NemesisRE/kiosk-mode) which and create some crazy kiosk setups. 
 Unfortunately I have found it to be quite buggy with BrowserMod when it comes to hiding the side and top navigation, but I thought I would include this script anyway in case you use it.
-
-### Native Cast functionality
-Basic and simple. This will always be supported by Home Assistant but due to the way it is written, it is quite basic in its features but that can also be an advantage that no updates should hopefully be needed.
 
 ---
 
@@ -67,7 +68,7 @@ You will need to install these HACs to allow the below setup to work:
 * [HTML Card](https://github.com/PiotrMachowski/lovelace-html-card)
 * [CSS Card Mod](https://github.com/thomasloven/lovelace-card-mod)
 
-First create a 1 panel view with the visibility of all the users hidden. (hint, create a view and then click on the edit button at the top and click 'visibility', un-tick all the users so it's hidden from navigation)
+Create a 1 panel view with the visibility of all the users hidden. (hint, create a view and then click on the edit button at the top and click 'visibility', un-tick all the users so it's hidden from navigation)
 
 ![Home Assistant 1 Panel Setup](/images/immich-home-assistant-one-panel-config.jpg)
 
