@@ -11,12 +11,11 @@ This is a community driven application that basically looks and acts like Google
 
 ![Immich Homepage](/images/immich-homepage.jpg)
 
-The learning curve I had to work out was how to display those images within a nice pretty wrapper. Which is how I then started testing Beta builds for [immich-kiosk](https://github.com/damongolding/immich-kiosk)
+The learning curve I had to work out was how to display those images within a nice pretty wrapper. Which is when I discovered [immich-kiosk](https://github.com/damongolding/immich-kiosk)
 
 ![Immich Kiosk Example](/images/immich-kiosk-fullscreen.jpg)
 
-Immich-Kiosk is so nice to use; can be behind a password, add fade to your photos, time/date, so different images on different frames and so on. To help contribute, I have been going through requests and when people ask to check a build, I have been doing so and contributing my own ideas on how to improve it.
-https://github.com/damongolding/immich-kiosk/discussions/95#discussioncomment-10835550
+Immich-Kiosk is so nice to use; can be behind a password, add fade to your photos, time/date, show different images on different frames and so on. 
 
 The only limitation I saw now was how to get from Immich-Kiosk to Google Home Hub. Blueprints was the only way I could see this working while making it simple for new users.
 
