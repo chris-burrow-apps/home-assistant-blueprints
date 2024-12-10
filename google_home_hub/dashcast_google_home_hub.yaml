@@ -48,94 +48,8 @@ trigger:
     minutes: "/10"
   
 action:
-  - if:
-      - condition: and
-        conditions:
-          - condition: time
-            after: !input 'start_time'
-            before: !input 'stop_time'
-          - condition: or
-            conditions:
-              - condition: state
-                entity_id: !input 'media_player'
-                state: 'off'
-              - condition: state
-                entity_id: !input 'media_player'
-                state: 'idle'
-    then:
-      - action: media_player.volume_mute
-        metadata: {}
-        data:
-          is_volume_muted: true
-        target:
-          entity_id: !input 'media_player'
-      - action: media_player.turn_off
-        target:
-          entity_id: !input 'media_player'
-      - delay:
-          hours: 0
-          minutes: 0
-          seconds: 2
-          milliseconds: 0
-      - action: dash_cast.load_url
-        metadata: {}
-        data:
-          force: true
-          entity_id: !input 'media_player'
-          url: !input 'dashboard_url'
-      - delay:
-          hours: 0
-          minutes: 0
-          seconds: 5
-          milliseconds: 0
-      - action: media_player.volume_mute
-        metadata: {}
-        data:
-          is_volume_muted: false
-        target:
-          entity_id: !input 'media_player'
-  - if:
-      - condition: and
-        conditions:
-          - condition: time
-            after: !input 'start_time'
-            before: !input 'stop_time'
-          - condition: template
-            value_template: >
-              {{ 'DashCast' in state_attr(selected_player, 'app_name') }}
-    then:
-      - action: media_player.volume_mute
-        metadata: {}
-        data:
-          is_volume_muted: true
-        target:
-          entity_id: !input 'media_player'
-      - action: media_player.turn_off
-        target:
-          entity_id: !input 'media_player'
-      - delay:
-          hours: 0
-          minutes: 0
-          seconds: 2
-          milliseconds: 0
-      - action: dash_cast.load_url
-        metadata: {}
-        data:
-          force: true
-          entity_id: !input 'media_player'
-          url: !input 'dashboard_url'
-      - delay:
-          hours: 0
-          minutes: 0
-          seconds: 5
-          milliseconds: 0
-      - action: media_player.volume_mute
-        metadata: {}
-        data:
-          is_volume_muted: false
-        target:
-          entity_id: !input 'media_player'
-  - if:
+  - choose:
+    - conditions:
       - condition: or
         conditions:
           - condition: trigger
@@ -147,17 +61,111 @@ action:
                 after: !input 'stop_time'
               - condition: template
                 value_template: >
-                  {{ 'Home Assistant Lovelace' in state_attr(selected_player, 'app_name') }}
+                  {{ 'DashCast' in state_attr(selected_player, 'app_name') }}
           - condition: and
             conditions:
               - condition: time
                 before: !input 'start_time'
               - condition: template
                 value_template: >
-                  {{ 'Home Assistant Lovelace' in state_attr(selected_player, 'app_name') }}
-    then:
+                  {{ 'DashCast' in state_attr(selected_player, 'app_name') }}
+      sequence:
       - action: media_player.turn_off
         metadata: {}
         data: {}
+        target:
+          entity_id: !input 'media_player'
+    - conditions:
+      - condition: and
+        conditions:
+          - condition: time
+            after: !input 'start_time'
+            before: !input 'stop_time'
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: !input 'media_player'
+                state: 'off'
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity_id: !input 'media_player'
+                    state: idle
+                  - condition: not
+                    conditions:
+                      - condition: template
+                        value_template: >
+                          {{ 'DashCast' in state_attr(selected_player, 'app_name') }}
+      sequence:
+      - action: media_player.volume_mute
+        metadata: {}
+        data:
+          is_volume_muted: true
+        target:
+          entity_id: !input 'media_player'
+      - action: media_player.turn_off
+        target:
+          entity_id: !input 'media_player'
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+      - action: dash_cast.load_url
+        metadata: {}
+        data:
+          force: true
+          entity_id: !input 'media_player'
+          url: !input 'dashboard_url'
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+      - action: media_player.volume_mute
+        metadata: {}
+        data:
+          is_volume_muted: false
+        target:
+          entity_id: !input 'media_player'
+    - conditions:
+      - condition: and
+        conditions:
+          - condition: time
+            after: !input 'start_time'
+            before: !input 'stop_time'
+          - condition: template
+            value_template: >
+              {{ 'DashCast' in state_attr(selected_player, 'app_name') }}
+      sequence:
+      - action: media_player.volume_mute
+        metadata: {}
+        data:
+          is_volume_muted: true
+        target:
+          entity_id: !input 'media_player'
+      - action: media_player.turn_off
+        target:
+          entity_id: !input 'media_player'
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+      - action: dash_cast.load_url
+        metadata: {}
+        data:
+          force: true
+          entity_id: !input 'media_player'
+          url: !input 'dashboard_url'
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+      - action: media_player.volume_mute
+        metadata: {}
+        data:
+          is_volume_muted: false
         target:
           entity_id: !input 'media_player'
