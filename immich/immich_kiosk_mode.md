@@ -63,10 +63,12 @@ Unfortunately I have found it to be quite buggy with BrowserMod when it comes to
 
 For both the versions there is a common setup of setting up a hidden dashboard showing an iframe with your immich-kiosk url. So far I have not been able to work out how to get it to self adjust to each screen size so you will have to create different dashboards for each screen size.
 
+### HACs libraries
 You will need to install these HACs to allow the below setup to work:
 * [HTML Card](https://github.com/PiotrMachowski/lovelace-html-card)
 * [CSS Card Mod](https://github.com/thomasloven/lovelace-card-mod)
 
+### Home Assistant Dashboard Setup
 Create a 1 panel view with the visibility of all the users hidden. (hint, create a view and then click on the edit button at the top and click 'visibility', un-tick all the users so it's hidden from navigation)
 
 ![Home Assistant 1 Panel Setup](/images/immich-home-assistant-one-panel-config.jpg)
