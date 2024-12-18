@@ -2,9 +2,9 @@
 
 I have been using Home Assistant for 10+ years, it's about time I started to contribute to help other users.
 
-If these saved you some time. Maybe think about [buying me a coffee](https://www.buymeacoffee.com/chrisburrow)
+If these saved you some time. Maybe think about [giving me a tip](https://ko-fi.com/chrisburrow1739)
 
-<img src="/images/bmc_qr.png" href="https://www.buymeacoffee.com/chrisburrow" alt="Buy Me a Coffee Link" width="200"/>
+<img src="/images/kofi_qrcode.png" href="https://ko-fi.com/chrisburrow1739" alt="Give me a tip" width="200"/>
 
 I have these blueprints that may help some other people:
 
