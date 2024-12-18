@@ -11,12 +11,11 @@ This is a community driven application that basically looks and acts like Google
 
 ![Immich Homepage](/images/immich-homepage.jpg)
 
-The learning curve I had to work out was how to display those images within a nice pretty wrapper. Which is how I then started testing Beta builds for [immich-kiosk](https://github.com/damongolding/immich-kiosk)
+The learning curve I had to work out was how to display those images within a nice pretty wrapper. Which is when I discovered [immich-kiosk](https://github.com/damongolding/immich-kiosk)
 
 ![Immich Kiosk Example](/images/immich-kiosk-fullscreen.jpg)
 
-Immich-Kiosk is so nice to use; can be behind a password, add fade to your photos, time/date, so different images on different frames and so on. To help contribute, I have been going through requests and when people ask to check a build, I have been doing so and contributing my own ideas on how to improve it.
-https://github.com/damongolding/immich-kiosk/discussions/95#discussioncomment-10835550
+Immich-Kiosk is so nice to use; can be behind a password, add fade to your photos, time/date, show different images on different frames and so on. 
 
 The only limitation I saw now was how to get from Immich-Kiosk to Google Home Hub. Blueprints was the only way I could see this working while making it simple for new users.
 
@@ -50,12 +49,13 @@ homeassistant:
 
 There is 2 different ways I worked out how to set this up locally:
 
+### Native Cast
+Basic and simple. This will always be supported by Home Assistant but due to the way it is written, it is quite basic in its features but that can also be an advantage that no updates should hopefully be needed.
+
+
 ### DashCast
 Highly configurable but that can be its downfall. It is a 3rd party add on for Home Assistant that can be linked with [BrowserMod](https://github.com/thomasloven/hass-browser_mod) or [Kiosk-mode](https://github.com/NemesisRE/kiosk-mode) which and create some crazy kiosk setups. 
 Unfortunately I have found it to be quite buggy with BrowserMod when it comes to hiding the side and top navigation, but I thought I would include this script anyway in case you use it.
-
-### Native Cast functionality
-Basic and simple. This will always be supported by Home Assistant but due to the way it is written, it is quite basic in its features but that can also be an advantage that no updates should hopefully be needed.
 
 ---
 
@@ -63,7 +63,13 @@ Basic and simple. This will always be supported by Home Assistant but due to the
 
 For both the versions there is a common setup of setting up a hidden dashboard showing an iframe with your immich-kiosk url. So far I have not been able to work out how to get it to self adjust to each screen size so you will have to create different dashboards for each screen size.
 
-First create a 1 panel view with the visibility of all the users hidden. (hint, create a view and then click on the edit button at the top and click 'visibility', un-tick all the users so it's hidden from navigation)
+### HACs libraries
+You will need to install these HACs to allow the below setup to work:
+* [HTML Card](https://github.com/PiotrMachowski/lovelace-html-card)
+* [CSS Card Mod](https://github.com/thomasloven/lovelace-card-mod)
+
+### Home Assistant Dashboard Setup
+Create a 1 panel view with the visibility of all the users hidden. (hint, create a view and then click on the edit button at the top and click 'visibility', un-tick all the users so it's hidden from navigation)
 
 ![Home Assistant 1 Panel Setup](/images/immich-home-assistant-one-panel-config.jpg)
 
